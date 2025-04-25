@@ -61,7 +61,7 @@ class Glial_1D_p_r(regularizers.Regularizer):
         return {"smoothness_strength_p": self.smoothness_strength_p, "smoothness_strength_r": self.smoothness_strength_r}
 
 
-
+"""
 class Glial_1D_p_r_window_size(regularizers.Regularizer):
     def __init__(self, smoothness_strength_p, smoothness_strength_r, window_size_p=1, window_size_r=1):
         self.smoothness_strength_p = smoothness_strength_p  # Smoothness penalty strength projective
@@ -94,40 +94,9 @@ class Glial_1D_p_r_window_size(regularizers.Regularizer):
         }
 
 
-
-
-
-
-
-
 """
-class SmoothnessScheduler(tf.keras.callbacks.Callback):
-    def __init__(self, reg, increase_factor=1.05, decrease_factor=0.95, min_strength=1e-5, max_strength=0.1):
-        self.reg = reg
-        self.increase_factor = increase_factor  # How much to increase smoothness if validation loss improves
-        self.decrease_factor = decrease_factor  # How much to decrease smoothness if validation loss worsens
-        self.min_strength = min_strength  # Prevents smoothness from going too low
-        self.max_strength = max_strength  # Prevents smoothness from going too high
-        self.prev_val_loss = float('inf')  # Track validation loss
 
-    def on_epoch_end(self, epoch, logs=None):
-        val_loss = logs.get("val_loss")  # Get current validation loss
 
-        if val_loss is not None:
-            # If validation loss decreased → increase smoothness strength
-            if val_loss < self.prev_val_loss:
-                if hasattr(self.reg, 'smoothness_strength_p'):
-                    self.reg.smoothness_strength_p = min(self.reg.smoothness_strength_p * self.increase_factor, self.max_strength)
-                if hasattr(self.reg, 'smoothness_strength_r'):
-                    self.reg.smoothness_strength_r = min(self.reg.smoothness_strength_r * self.increase_factor, self.max_strength)
-            else:
-                # If validation loss increased → decrease smoothness strength
-                if hasattr(self.reg, 'smoothness_strength_p'):
-                    self.reg.smoothness_strength_p = max(self.reg.smoothness_strength_p * self.decrease_factor, self.min_strength)
-                if hasattr(self.reg, 'smoothness_strength_r'):
-                    self.reg.smoothness_strength_r = max(self.reg.smoothness_strength_r * self.decrease_factor, self.min_strength)
 
-            self.prev_val_loss = val_loss  # Update validation loss tracker
 
-        print(f"Epoch {epoch+1}: Updated smoothness strengths -> p={self.reg.smoothness_strength_p:.6f}, r={self.reg.smoothness_strength_r:.6f}")
-"""
+
