@@ -14,4 +14,6 @@ For example weight matrices between two hidden layers (40x40):
 For shared successful activations plotting code to identify important neurons in classification:
 'Shared successful activations with highlighted bars plotter.py'
 
+For any questions,
+Email: ob401@exeter.ac.uk
 
